@@ -4,6 +4,7 @@ const heartContainer = document.getElementById('heart-container');
 const welcomeCard = document.getElementById('welcomeCard');
 const mainContent = document.getElementById('mainContent');
 
+// Open surprise button
 openBtn.addEventListener('click', () => {
   loadingText.classList.remove('hidden');
   openBtn.disabled = true;
@@ -13,10 +14,14 @@ openBtn.addEventListener('click', () => {
   setTimeout(() => {
     welcomeCard.classList.add('hidden');
     mainContent.classList.remove('hidden');
+
+    // Start the timer immediately when content appears
     updateTimer();
+    setInterval(updateTimer, 1000);
   }, 2200);
 });
 
+// Heart animation
 function createHeartRain() {
   const emojis = ['💗', '💜', '❤️', '✨'];
 
@@ -37,11 +42,15 @@ function createHeartRain() {
   }
 }
 
+// COUNT-UP TIMER
+// February 14, 2026 at 2:00 AM EST
 const startDate = new Date('2026-02-14T02:00:00-05:00');
 
 function updateTimer() {
   const now = new Date();
   const diff = now - startDate;
+
+  if (diff < 0) return;
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -53,4 +62,3 @@ function updateTimer() {
   document.getElementById('minutes').textContent = minutes;
   document.getElementById('seconds').textContent = seconds;
 }
-
